@@ -5,8 +5,6 @@ import os
 
 linesep = os.linesep
 system = platform.system()
-if system == "Windows":
-    linesep = " ^"
 
 def expand_env_var(var):
     """
@@ -36,7 +34,8 @@ def test_cases():
             + linesep
             + "echo only"
             )
-    
+    if system == "Windows":
+        out = os.system("powershell.exe & " + command)
     out = os.system(command)
     exp = (
         "a"
