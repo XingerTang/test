@@ -32,7 +32,7 @@ jobs:
             - name: Build SDist and wheel
               run: python3 -m build
 
-            - name: Install AlphaPeel
+            - name: Install Software
               run: pip install dist/Test-0.0-py3-none-any.whl
 
             - name: Install pytest
@@ -41,3 +41,7 @@ jobs:
             - name: Run pytest
               run: |
                 pytest --maxfail=10
+
+            - name: Run test
+              run: |
+                python3 tests/run_test.py

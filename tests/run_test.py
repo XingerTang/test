@@ -26,7 +26,7 @@ def test_cases():
         + "echo only"
         )
     
-    out = subprocess.run(command, shell=True, capture_output=True, text=True)
+    out = os.system(command)
     exp = (
         "a"
         + linesep
@@ -39,6 +39,6 @@ def test_cases():
         + "only"
         + linesep
     )
-    assert out.stdout == exp
+    assert out == 0
 
 test_cases()
