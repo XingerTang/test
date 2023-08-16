@@ -11,7 +11,7 @@ def expand_env_var(var):
     """
     system = platform.system()
     if system == "Windows":
-        return f"$Env:{var}"
+        return f"%{var}%"
     return f"${var}"
 
 def test_cases():
@@ -23,7 +23,9 @@ def test_cases():
         + linesep
         + "done"
         + linesep
-        + "echo only")
+        + "echo only"
+        )
+    
     out = subprocess.run(command, shell=True, capture_output=True, text=True)
     exp = (
         "a"
