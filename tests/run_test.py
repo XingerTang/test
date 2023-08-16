@@ -1,6 +1,6 @@
 import subprocess
 import platform
-import pytest
+# import pytest
 import os
 
 linesep = os.linesep
@@ -21,5 +21,22 @@ def test_cases():
         + "echo "
         + expand_env_var("method")
         + linesep
-        + "done")
-    subprocess.run(command, shell=True, capture_output=True, text=True)
+        + "done"
+        + linesep
+        + "echo only")
+    out = subprocess.run(command, shell=True, capture_output=True, text=True)
+    exp = (
+        "a"
+        + linesep
+        + "b"
+        + linesep
+        + "c"
+        + linesep
+        + "d"
+        + linesep
+        + "only"
+        + linesep
+    )
+    assert out.stdout == exp
+
+test_cases()
