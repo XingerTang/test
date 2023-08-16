@@ -19,9 +19,13 @@ def test_cases():
     global system
     if system == "Windows":
         command = (
-            "echo 'a'"
+            "{"
+            + linesep
+            + "echo 'a'"
             + linesep
             + "echo 'b'"
+            + linesep
+            + "}"
         )
     else:
         command = (
@@ -35,7 +39,7 @@ def test_cases():
             + "echo only"
             )
     if system == "Windows":
-        out = os.system("powershell.exe & " + command)
+        out = os.system("powershell.exe -Command " + command)
     out = os.system(command)
     exp = (
         "a"
