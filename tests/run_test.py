@@ -19,14 +19,9 @@ def test_cases():
     global system
     if system == "Windows":
         command = (
-            "$methods = 'a', 'b', 'c', 'd'"
+            "Write-Host a"
             + linesep
-            + "foreach ($method in $methods) {"
-            + linesep
-            + "Write-Host $method"
-            + linesep
-            + "}"
-            + "Write-Host only"
+            + "Write-Host b"
         )
     else:
         command = (
