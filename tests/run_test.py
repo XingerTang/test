@@ -21,6 +21,7 @@ def test_cases():
         command = (
             "echo 'a'"
             + linesep
+            + linesep
             + "echo 'b'"
         )
     else:
