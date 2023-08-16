@@ -18,15 +18,12 @@ def expand_env_var(var):
 def test_cases():
     global system
     if system == "Windows":
-        command = (
-            "{"
-            + linesep
-            + "echo 'a'"
-            + linesep
-            + "echo 'b'"
-            + linesep
-            + "}"
-        )
+        command = """\
+{
+    echo Hello
+    echo World
+}
+"""
     else:
         command = (
             "for method in a b c d; do"
