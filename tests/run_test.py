@@ -19,9 +19,9 @@ def test_cases():
     global system
     if system == "Windows":
         command = (
-            "Write-Host a"
+            "echo 'a'"
             + linesep
-            + "Write-Host b"
+            + "echo 'b'"
         )
     else:
         command = (
