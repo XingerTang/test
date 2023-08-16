@@ -18,6 +18,10 @@ jobs:
               with:
                 python-version: "3.x"
 
+            - name: Run test
+              run: |
+                python3 tests/run_test.py
+
             - name: Install pypa/build
               run: >-
                 python3 -m
@@ -41,7 +45,3 @@ jobs:
             - name: Run pytest
               run: |
                 pytest --maxfail=10
-
-            - name: Run test
-              run: |
-                python3 tests/run_test.py

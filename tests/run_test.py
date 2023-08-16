@@ -11,7 +11,7 @@ def expand_env_var(var):
     """
     system = platform.system()
     if system == "Windows":
-        return f"%%{var}%%"
+        return f"%{var}%"
     return f"${var}"
 
 def test_cases():
