@@ -4,27 +4,41 @@ import platform
 import os
 
 linesep = os.linesep
+system = platform.system()
 
 def expand_env_var(var):
     """
     returns the environment variables used with the corresponding os
     """
-    system = platform.system()
+    global system
     if system == "Windows":
         return f"%{var}%"
     return f"${var}"
 
 def test_cases():
-    command = (
-        "for method in a b c d; do"
-        + linesep
-        + "echo "
-        + expand_env_var("method")
-        + linesep
-        + "done"
-        + linesep
-        + "echo only"
+    global system
+    if system == "Windows":
+        command = (
+            "$methods = 'a', 'b', 'c', 'd'"
+            + linesep
+            + "foreach ($method in $methods) {"
+            + linesep
+            + "Write-Host $method"
+            + linesep
+            + "}"
+            + "Write-Host only"
         )
+    else:
+        command = (
+            "for method in a b c d; do"
+            + linesep
+            + "echo "
+            + expand_env_var("method")
+            + linesep
+            + "done"
+            + linesep
+            + "echo only"
+            )
     
     out = os.system(command)
     exp = (
