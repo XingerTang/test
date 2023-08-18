@@ -67,9 +67,9 @@ def test_file():
     with open(file_w) as f:
         i = 0
         for line in f:
-            if system == "Windows":
-                parts = line.strip(os.linesep)
-                parts = parts.split()
-                i += 1
-                print(i)
-                parts[0]
+            parts = line.strip(os.linesep)
+            parts = parts.split()
+            i += 1
+            print(i)
+            parts[0]
+            assert i == 1
