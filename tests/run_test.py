@@ -65,10 +65,8 @@ def test_file():
     write_file(file_w, seg[:, subset])
 
     with open(file_w) as f:
-        content = f.read()
-        lines = content.split(os.linesep)
-        for line in lines:
+        for line in f:
             if system == "Windows":
                 parts = line.strip()
-                parts = line.split()
+                parts = parts.split()
                 idx = parts[0]
