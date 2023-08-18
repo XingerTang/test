@@ -36,7 +36,9 @@ jobs:
               run: pip install dist/Test-0.0-py3-none-any.whl
 
             - name: Install pytest
-              run: pip install pytest
+              run: |
+                pip install pytest
+                pip install pytest-benchmark
 
             - name: Install numpy
               run: pip install numpy
