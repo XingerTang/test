@@ -1,55 +1,26 @@
-import subprocess
-import platform
-# import pytest
+import pytest
+import time
 import os
 
-linesep = os.linesep
-system = platform.system()
-
-def expand_env_var(var):
+def something(duration=0.000001):
     """
-    returns the environment variables used with the corresponding os
+    Function that needs some serious benchmarking.
     """
-    global system
-    if system == "Windows":
-        return f"%{var}%"
-    return f"${var}"
+    time.sleep(duration)
+    # You may return anything you want, like the result of a computation
+    return 123
 
-def test_cases():
-    global system
-    if system == "Windows":
-        command = """\
-{
-    echo Hello
-    echo World
-}
-"""
-    else:
-        command = (
-            "for method in a b c d; do"
-            + linesep
-            + "echo "
-            + expand_env_var("method")
-            + linesep
-            + "done"
-            + linesep
-            + "echo only"
-            )
-    if system == "Windows":
-        out = os.system("powershell.exe -Command " + command)
-    out = os.system(command)
-    exp = (
-        "a"
-        + linesep
-        + "b"
-        + linesep
-        + "c"
-        + linesep
-        + "d"
-        + linesep
-        + "only"
-        + linesep
-    )
-    assert out == 0
+def test_my_stuff(benchmark):
+    # benchmark something
+    benchmark.extra_info['foo'] = 'bar'
+    result = benchmark(something)
+    # Extra code, to verify that the run completed correctly.
+    # Sometimes you may want to check the result, fast functions
+    # are no good if they return incorrect results :-)
+    assert result == 123
 
-test_cases()
+def test_my_stuff_different_arg(benchmark):
+    # benchmark something, but add some arguments
+    result = benchmark(something, 0.001)
+    print("1234")
+    assert result == 123
