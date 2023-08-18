@@ -67,4 +67,5 @@ def test_file():
     with open(file_w) as f:
         for line in f:
             if system == "Windows":
-                assert line == []
+                parts = line.split()
+                assert parts == []
