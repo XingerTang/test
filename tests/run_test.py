@@ -67,8 +67,7 @@ def test_file():
     with open(file_w) as f:
         i = 0
         for line in f:
-            parts = line.strip(os.linesep)
-            parts = parts.split()
+            parts = line.split()
             i += 1
             print(i)
             parts[0]
