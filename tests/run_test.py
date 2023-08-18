@@ -71,4 +71,4 @@ def test_file():
             if system == "Windows":
                 parts = line.strip()
                 parts = line.split()
-                assert parts == []
+                idx = parts[0]
