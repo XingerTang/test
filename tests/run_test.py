@@ -72,4 +72,5 @@ def test_file():
                 parts = parts.split()
                 i += 1
                 print(i)
+                parts[0]
                 assert parts == []
