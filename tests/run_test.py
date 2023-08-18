@@ -71,4 +71,5 @@ def test_file():
                 parts = line.strip(os.linesep)
                 parts = parts.split()
                 i += 1
+                print(i)
                 assert parts == []
