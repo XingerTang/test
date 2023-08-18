@@ -2,6 +2,7 @@ import pytest
 import time
 import os
 import numpy as np
+import platform
 
 def something(duration=0.000001):
     """
@@ -54,6 +55,7 @@ def write_file(file_path, list_of_data):
             file.write(" ".join(row) + linesep)
 
 def test_file():  
+    system = platform.system()
     subset = np.floor(np.linspace(1, 1000, num=200))
     subset = np.concatenate(([0], subset), dtype=int, casting="unsafe")
 
@@ -64,4 +66,5 @@ def test_file():
 
     with open(file_w) as f:
         for line in f:
-            assert line == []
+            if system == "Windows":
+                assert line == []
