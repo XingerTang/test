@@ -52,7 +52,7 @@ def write_file(file_path, list_of_data):
     linesep = os.linesep
     with open(file_path, "w") as file:
         for row in list_of_data:
-            file.write(" ".join(row) + linesep)
+            file.write(" ".join(row))
 
 def test_file():  
     system = platform.system()
