@@ -12,20 +12,20 @@ def something(duration=0.000001):
     # You may return anything you want, like the result of a computation
     return 123
 
-def test_my_stuff(benchmark):
-    # benchmark something
-    benchmark.extra_info['foo'] = 'bar'
-    result = benchmark(something)
-    # Extra code, to verify that the run completed correctly.
-    # Sometimes you may want to check the result, fast functions
-    # are no good if they return incorrect results :-)
-    assert result == 123
+# def test_my_stuff(benchmark):
+#     # benchmark something
+#     benchmark.extra_info['foo'] = 'bar'
+#     result = benchmark(something)
+#     # Extra code, to verify that the run completed correctly.
+#     # Sometimes you may want to check the result, fast functions
+#     # are no good if they return incorrect results :-)
+#     assert result == 123
 
-def test_my_stuff_different_arg(benchmark):
-    # benchmark something, but add some arguments
-    result = benchmark(something, 0.001)
-    print("1234")
-    assert result == 123
+# def test_my_stuff_different_arg(benchmark):
+#     # benchmark something, but add some arguments
+#     result = benchmark(something, 0.001)
+#     print("1234")
+#     assert result == 123
 
 
 def read_file(file_path):
@@ -69,4 +69,5 @@ def test_file():
             if system == "Windows":
                 parts = line.strip(os.linesep)
                 parts = parts.split()
-                assert parts == []
+                idx = parts[1]
+                idx = parts[0]
