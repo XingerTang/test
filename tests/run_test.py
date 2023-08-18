@@ -64,5 +64,4 @@ def test_file():
 
     with open(file_w) as f:
         for line in f:
-            parts = line.split()
-            idx = parts[0]
+            assert line == []
