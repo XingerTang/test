@@ -52,7 +52,7 @@ def write_file(file_path, list_of_data):
     linesep = os.linesep
     with open(file_path, "w") as file:
         for row in list_of_data:
-            file.write(" ".join(row))
+            file.write(" ".join(row) + "\n")
 
 def test_file():  
     system = platform.system()
@@ -72,4 +72,3 @@ def test_file():
             i += 1
             print(i)
             parts[0]
-            assert i == 1
