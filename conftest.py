@@ -1,5 +1,6 @@
 import pytest
 import numpy as np
+import operator
 
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport():
@@ -22,51 +23,83 @@ def pytest_runtest_makereport():
 
 @pytest.hookimpl()
 def pytest_terminal_summary(terminalreporter):
-    dt = {"names": ("Type", "Population Accu", "Gen1 Accu", "Gen2 Accu", "Gen3 Accu", "Gen4 Accu", "Gen5 Accu"),
-                                                  "formats": ("S49", "f4", "f4", "f4", "f4", "f4", "f4")}
+    columns = (
+        "Type",
+        "Population Accu",
+        "Gen1 Accu",
+        "Gen2 Accu",
+        "Gen3 Accu",
+        "Gen4 Accu",
+        "Gen5 Accu",
+    )
+    dt = {"names": columns, "formats": ("S53", "f4", "f4", "f4", "f4", "f4", "f4")}
     accu = np.loadtxt("tests/accu_report.txt", dtype=dt)
 
-    mkr_accu = list(filter(lambda x:(x["Type"].decode("UTF-8").split("$")[1] == "Marker_accuracies"), accu))
-    ind_accu = list(filter(lambda x:(x["Type"].decode("UTF-8").split("$")[1] == "Individual_accuracies"), accu))
-    sorted_mkr_accu = sorted(
-        mkr_accu, 
-        key=lambda x:(x["Population Accu"], x["Gen1 Accu"],x["Gen2 Accu"], x["Gen3 Accu"],x["Gen4 Accu"],x["Gen5 Accu"]), 
-        reverse=True
+    mkr_accu = list(
+        filter(
+            lambda x: (x["Type"].decode("UTF-8").split("$")[1] == "Marker_accuracies"),
+            accu,
         )
+    )
+    ind_accu = list(
+        filter(
+            lambda x: (
+                x["Type"].decode("UTF-8").split("$")[1] == "Individual_accuracies"
+            ),
+            accu,
+        )
+    )
+    sorted_mkr_accu = sorted(
+        mkr_accu, key=operator.itemgetter(*columns[1:]), reverse=True
+    )
     sorted_ind_accu = sorted(
-        ind_accu, 
-        key=lambda x:(x["Population Accu"], x["Gen1 Accu"],x["Gen2 Accu"], x["Gen3 Accu"],x["Gen4 Accu"],x["Gen5 Accu"]),
-        reverse=True
+        ind_accu, key=operator.itemgetter(*columns[1:]), reverse=True
+    )
+
+    format_first_row = "{:<45} " + "{:<20} " * 6
+    format_row = "{:<45} " + "{:<20.3f} " * 6
+
+    terminalreporter.write_sep("-", "Accuracy")
+    terminalreporter.write_line(format_first_row.format(*columns))
+    for test in accu:
+        terminalreporter.write_line(
+            format_row.format(
+                test["Type"].decode("UTF-8")[:-11],
+                test["Population Accu"],
+                test["Gen1 Accu"],
+                test["Gen2 Accu"],
+                test["Gen3 Accu"],
+                test["Gen4 Accu"],
+                test["Gen5 Accu"],
+            )
         )
 
-    terminalreporter.write_sep("-", "Marker Accuracy")
-    columns = ("Type", "Population Accu", "Gen1 Accu", "Gen2 Accu", "Gen3 Accu", "Gen4 Accu", "Gen5 Accu")
-    format_first_row = "{:<30} " + "{:<20} " * 6
-    format_row = "{:<30} " + "{:<20.3f} " * 6
+    terminalreporter.write_sep("-", "Marker Accuracy (Order by accuracy)")
     terminalreporter.write_line(format_first_row.format(*columns))
     for test in sorted_mkr_accu:
-        terminalreporter.write_line(format_row.format(
-            test["Type"].decode("UTF-8").split("$")[0],
-            test["Population Accu"],
-            test["Gen1 Accu"],
-            test["Gen2 Accu"],
-            test["Gen3 Accu"],
-            test["Gen4 Accu"],
-            test["Gen5 Accu"]
-        ))
+        terminalreporter.write_line(
+            format_row.format(
+                test["Type"].decode("UTF-8").split("$")[0],
+                test["Population Accu"],
+                test["Gen1 Accu"],
+                test["Gen2 Accu"],
+                test["Gen3 Accu"],
+                test["Gen4 Accu"],
+                test["Gen5 Accu"],
+            )
+        )
 
-    terminalreporter.write_sep("-", "Individual Accuracy")
-    columns = ("Type", "Population Accu", "Gen1 Accu", "Gen2 Accu", "Gen3 Accu", "Gen4 Accu", "Gen5 Accu")
-    format_first_row = "{:<30} " + "{:<20} " * 6
-    format_row = "{:<30} " + "{:<20.3f} " * 6
+    terminalreporter.write_sep("-", "Individual Accuracy (Order by accuracy)")
     terminalreporter.write_line(format_first_row.format(*columns))
     for test in sorted_ind_accu:
-        terminalreporter.write_line(format_row.format(
-            test["Type"].decode("UTF-8").split("$")[0],
-            test["Population Accu"],
-            test["Gen1 Accu"],
-            test["Gen2 Accu"],
-            test["Gen3 Accu"],
-            test["Gen4 Accu"],
-            test["Gen5 Accu"]
-        ))
+        terminalreporter.write_line(
+            format_row.format(
+                test["Type"].decode("UTF-8").split("$")[0],
+                test["Population Accu"],
+                test["Gen1 Accu"],
+                test["Gen2 Accu"],
+                test["Gen3 Accu"],
+                test["Gen4 Accu"],
+                test["Gen5 Accu"],
+            )
+        )

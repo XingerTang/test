@@ -1,4 +1,3 @@
-
 test_single$Marker_accuracies 0.865 1.0 0.884 0.855 0.835 0.697
 test_single$Individual_accuracies 0.936 1.0 0.945 0.932 0.924 0.878
 test_single_estmaf$Marker_accuracies 0.863 0.996 0.882 0.854 0.835 0.697
@@ -7,10 +6,14 @@ test_multi$Marker_accuracies 0.98 0.996 0.949 0.977 0.988 0.99
 test_multi$Individual_accuracies 0.99 0.998 0.976 0.989 0.994 0.995
 test_multi_estmaf$Marker_accuracies 0.977 0.993 0.941 0.976 0.987 0.989
 test_multi_estmaf$Individual_accuracies 0.989 0.997 0.972 0.988 0.993 0.995
-test_multi_estmaf_estsrrors$Marker_accuracies 0.978 0.994 0.943 0.976 0.986 0.99
-test_multi_estmaf_estsrrors$Individual_accuracies 0.989 0.998 0.973 0.988 0.993 0.995
+test_multi_estmaf_esterrors$Marker_accuracies 0.978 0.994 0.943 0.976 0.986 0.99
+test_multi_estmaf_esterrors$Individual_accuracies 0.989 0.998 0.973 0.988 0.993 0.995
 test_multi_seq$Marker_accuracies 0.907 0.797 0.904 0.976 0.992 0.994
 test_multi_seq$Individual_accuracies 0.971 0.915 0.959 0.989 0.996 0.997
+test_multi_estmaf_seq$Marker_accuracies 0.951 0.877 0.92 0.979 0.993 0.994
+test_multi_estmaf_seq$Individual_accuracies 0.977 0.941 0.962 0.99 0.997 0.997
+test_multi_estmaf_esterrors_seq$Marker_accuracies 0.951 0.877 0.92 0.979 0.993 0.994
+test_multi_estmaf_esterrors_seq$Individual_accuracies 0.977 0.941 0.962 0.99 0.997 0.997
 test_hybrid_single$Marker_accuracies 0.979 0.995 0.948 0.978 0.987 0.989
 test_hybrid_single$Individual_accuracies 0.99 0.998 0.975 0.989 0.994 0.995
 test_hybrid_single_seq$Marker_accuracies 0.914 0.801 0.923 0.979 0.992 0.994
